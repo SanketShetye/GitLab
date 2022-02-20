@@ -72,4 +72,9 @@ public class AddNumberServiceImplTest {
 		int total = addNumberServiceImpl.addNumbers("//*-\n4*-5*-11*-45");
 		Assert.assertEquals(65,total);
 	}
+
+	@Test(expected=InvalidInputException.class)
+	public void testAddNumberNegativeValues() {
+		addNumberServiceImpl.addNumbers("//*-\n-4*--5*-11*-45");
+	}
 }

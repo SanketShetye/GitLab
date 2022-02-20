@@ -1,5 +1,7 @@
 package com.example.numbers.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.stereotype.Service;
@@ -15,14 +17,28 @@ public class AddNumberServiceImpl implements AddNumberService {
 			return 0;
 		}
 		String[] numbersArray = getNumbersFromString(numbers);
+		int total = add(numbersArray);
+		return total;
+	}
+
+	private int add(String[] numbersArray) {
 		int total = 0;
+		List<Integer> negativeNumbers = new ArrayList<>();
 		if (Objects.nonNull(numbersArray) && numbersArray.length > 0) {
 			for (String number : numbersArray) {
 				try {
-					total += Integer.parseInt(number);
+					int value = Integer.parseInt(number);
+					total += value;
+					if (value < 0) {
+						negativeNumbers.add(value);
+					}
+
 				} catch (NumberFormatException e) {
 					throw new InvalidInputException("Expected Number received Character :" + number, e);
 				}
+			}
+			if (!negativeNumbers.isEmpty()) {
+				throw new InvalidInputException("Negatives not allowed :" + negativeNumbers.toString());
 			}
 		}
 		return total;
