@@ -6,6 +6,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.example.exception.InvalidInputException;
+
 
 @RunWith(MockitoJUnitRunner.class)
 public class AddNumberServiceImplTest {
@@ -34,5 +36,10 @@ public class AddNumberServiceImplTest {
 	public void testAddNumberNullValue() {
 		int total = addNumberServiceImpl.addNumbers(null);
 		Assert.assertEquals(0,total);
+	}
+
+	@Test(expected=InvalidInputException.class)
+	public void testAddNumberCharValue() {
+		addNumberServiceImpl.addNumbers("a,b");
 	}
 }

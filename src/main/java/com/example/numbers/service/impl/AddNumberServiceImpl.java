@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import org.springframework.stereotype.Service;
 
+import com.example.exception.InvalidInputException;
 import com.example.numbers.service.AddNumberService;
 
 @Service
@@ -17,7 +18,11 @@ public class AddNumberServiceImpl implements AddNumberService {
 		int total = 0;
 		if (Objects.nonNull(numbersArray) && numbersArray.length > 0) {
 			for (String number : numbersArray) {
-				total += Integer.parseInt(number);
+				try {
+					total += Integer.parseInt(number);
+				} catch(NumberFormatException e) {
+					throw new InvalidInputException("Excpeted Number received Character.",e);
+				}
 			}
 		}
 		return total;
