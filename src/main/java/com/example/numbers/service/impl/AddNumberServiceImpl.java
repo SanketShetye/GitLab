@@ -14,6 +14,7 @@ public class AddNumberServiceImpl implements AddNumberService {
 		if(Objects.isNull(numbers) || numbers.length()==0) {
 			return 0;
 		}
+		numbers = numbers.replace("\n", ",");
 		String[] numbersArray = numbers.split(",");
 		int total = 0;
 		if (Objects.nonNull(numbersArray) && numbersArray.length > 0) {
@@ -21,7 +22,7 @@ public class AddNumberServiceImpl implements AddNumberService {
 				try {
 					total += Integer.parseInt(number);
 				} catch(NumberFormatException e) {
-					throw new InvalidInputException("Excpeted Number received Character.",e);
+					throw new InvalidInputException("Expected Number received Character :"+number,e);
 				}
 			}
 		}
