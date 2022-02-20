@@ -42,4 +42,16 @@ public class AddNumberServiceImplTest {
 	public void testAddNumberCharValue() {
 		addNumberServiceImpl.addNumbers("a,b");
 	}
+
+	@Test
+	public void testAddNumberMultipleValues() {
+		int total = addNumberServiceImpl.addNumbers("4,5,1,5");
+		Assert.assertEquals(15,total);
+	}
+
+	@Test
+	public void testAddNumberMultipleValues2() {
+		int total = addNumberServiceImpl.addNumbers("4,5,11,45");
+		Assert.assertEquals(65,total);
+	}
 }
