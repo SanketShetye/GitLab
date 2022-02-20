@@ -60,4 +60,16 @@ public class AddNumberServiceImplTest {
 		int total = addNumberServiceImpl.addNumbers("4\n5,11\n45");
 		Assert.assertEquals(65,total);
 	}
+
+	@Test
+	public void testAddNumberSingleDelimiter() {
+		int total = addNumberServiceImpl.addNumbers("//;\n4;5;11;45");
+		Assert.assertEquals(65,total);
+	}
+
+	@Test
+	public void testAddNumberMultipleDelimiter() {
+		int total = addNumberServiceImpl.addNumbers("//*-\n4*-5*-11*-45");
+		Assert.assertEquals(65,total);
+	}
 }
